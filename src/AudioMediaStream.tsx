@@ -17,12 +17,10 @@ export default function AudioMediaStream() {
 
             source.connect(analyser);
             setAnalyser(analyser);
-            console.log("AudioContext state:", audioCtx.state);
+            audioCtxRef.current?.resume();
         });
 
-        document.addEventListener("click", () => {
-            audioCtxRef.current?.resume()
-        });
+
 
         return () => {
             audioCtxRef.current?.close();

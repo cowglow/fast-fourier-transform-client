@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import {useEffect, useRef} from "react";
 
 interface Props {
     analyser: AnalyserNode | null;
@@ -7,6 +7,23 @@ interface Props {
 export default function OscilloscopeCanvas({ analyser }: Props) {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const rafRef = useRef<number | null>(null);
+
+    const drawStartMessage = () => {
+        const canvas = canvasRef.current!;
+        const ctx = canvas.getContext("2d")!;
+        const {width, height} = canvas;
+
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.fillStyle = "white";
+        ctx.font = "24px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("Enable Microphone to Start", width / 2, height / 2);
+    };
 
     useEffect(() => {
         if (!analyser) return;
@@ -51,6 +68,8 @@ export default function OscilloscopeCanvas({ analyser }: Props) {
             if (rafRef.current) cancelAnimationFrame(rafRef.current);
         };
     }, [analyser]);
+
+    useEffect(() => drawStartMessage(), []);
 
     return (
         <canvas
