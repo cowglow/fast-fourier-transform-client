@@ -9,9 +9,8 @@ export default function App() {
             <div className="card">
                 <AudioMediaStream/>
             </div>
-            <p className="read-the-docs">
-                GitHub Repo: Link Coming Soon
-            </p>
+            <p className="read-the-docs"><a href="https://github.com/cowglow/fast-fourier-transform-client"
+                                            target='_blank' rel="noreferrer nofollow">GitHub Repo</a>.</p>
         </div>
     )
 }
